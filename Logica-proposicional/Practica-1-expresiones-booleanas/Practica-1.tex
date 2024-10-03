@@ -1,0 +1,367 @@
+\documentclass{article}
+\author{}
+
+%Packages
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{dirtytalk}
+\usepackage{textcomp}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[none]{hyphenat}
+\usepackage{biblatex}
+%---
+%Customize
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+%---
+
+\title{Práctica: Expresiones Booleanas 1}
+
+\hyphenpenalty 1
+\exhyphenpenalty 1
+
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \item Realizar las siguientes sustituciones textuales. Sea cuidadoso con la parentización. Remueva
+los paréntesis innecesarios.
+
+	\begin{enumerate}
+		\setlength\itemsep{1em}
+		\item $p[p := p \lor q]$
+			\myparagraph{Solución:}
+			\textlangle{} Aplicando sustitución textual, manteniendo parentesis de la variable sustituida \textrangle\par
+			($p \lor q$)\par
+			\textlangle{} Eliminando paréntesis redundantes \textrangle\par
+			$p \lor q$\par
+
+		\item $(p \lor q \Rightarrow q \lor p)[q := p \Rightarrow q]$
+			\myparagraph{Solución:}
+			\textlangle{} Sustitución textual de las ocurrencias de q \textrangle\par
+			$(p \lor (p \Rightarrow q) \Rightarrow (p \Rightarrow q) \lor p)$\par
+			\textlangle{} Eliminando paréntesis externos redundantes \textrangle\par
+			$p \lor (p \Rightarrow q) \Rightarrow (p \Rightarrow q) \lor p$\par
+			\textlangle{} Dado que la implicación es asociativa por la derecha el segundo \(p \Rightarrow q\) contiene paréntesis redundantes \textrangle\par
+			$p \lor (p \Rightarrow q) \Rightarrow p \Rightarrow q \lor p$\par
+
+		\item $((s \land q \equiv \neg r[r := s \lor q]) \Rightarrow p)[q := p \lor s]$
+			\myparagraph{Solución:}
+			\textlangle{} Sustitución de todas las ocurrencias de r \textrangle\par
+			$((s \land q \equiv \neg (s \lor q)) \Rightarrow p)[q := p \lor s]$\par
+			\textlangle{} Sustitución de todas las ocurrencias de q \textrangle\par
+			$((s \land (p \lor s) \equiv \neg (s \lor (p \lor s))) \Rightarrow p)$\par
+			\textlangle{} Eliminando paréntesis externos \textrangle\par
+			$(s \land (p \lor s) \equiv \neg (s \lor (p \lor s))) \Rightarrow p$\par
+			\textlangle{} Dado que \( \lor \) es asociativo: \(a \lor b \lor c \equiv ( a \lor b ) \lor c \equiv  a \lor (b  \lor c)\) \textrangle\par
+			$(s \land (p \lor s) \equiv \neg (s \lor p \lor s)) \Rightarrow p$\par
+
+		\item $(s[s := q \equiv w] \land true[p := w])[s := w \land x]$
+		
+		\item $(s \equiv p \land q)[s := p \lor r]$
+
+	\end{enumerate}
+
+    \item Realizar las siguientes sustituciones textuales simultáneas. Sea cuidadoso con la parentización.
+Remueva los paréntesis innecesarios.
+	\begin{enumerate}
+		\item $p[p, q := p \lor q, q \land p]$
+		
+		\item $(p \lor q \Rightarrow q \lor p)[q, r := p \Rightarrow q, (p \land q) \lor (p \Rightarrow x \lor s)]$
+		
+		\item $((s \land q \equiv \neg r[r := s \lor q]) \Rightarrow p)[q, s := p \lor s, p \land q]$
+		
+		\item $(s[s := q \equiv w] \land true[p := w])[s, w := w \land x, s]$
+		
+		\item $(s \Rightarrow p \land q)[s, r := p \lor r, p \lor s]$
+	\end{enumerate}
+
+    \item Realizar las siguientes sustituciones textuales. Sea cuidadoso con la parentización. Remueva
+los paréntesis innecesarios.
+
+	\begin{enumerate}
+		\item $p[p := p \lor q][q := q \land p]$
+		
+		\item $(p \lor q \Rightarrow q \lor p)[q := p \Rightarrow q][r := (p \land q) \lor (p \Rightarrow x \lor s)]$
+		
+		\item $((s \land q \equiv \neg r[r := s \lor q]) \Rightarrow p)[q := p \lor s][s := p \land q]$
+		
+		\item $(s[s := q \equiv w] \land true[p := w])[s := w \land x][w := s]$
+		
+		\item $(s \Rightarrow p \land q)[s := p \lor r][r := p \lor s][s := t][s := p \equiv v]$
+	\end{enumerate}
+
+	\item Para cada una de las expresiones E[z:=X] y \say{hints} X = Y, escriba la expresión resultante
+E[z:=Y]. Puede haber varias respuestas, hallarlas todas.
+
+	\begin{enumerate}
+		\item E[z:=X]: $true$\par
+		 X=Y: $true \equiv p \lor \neg p$
+
+			\myparagraph{Solución:}
+			\textlangle{} Tomando E: z \textrangle\par
+			$E: z$\par
+			\textlangle{} Con X \textrangle\par
+			$X: true$\par
+			\textlangle{} Con Y \textrangle\par
+			$Y: p \lor \neg p$\par
+			\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+			$E[z:=Y]: p \lor \neg p$\par
+			\hspace{0.8cm}
+
+		\item E[z:=X]: $false \lor p \equiv p$ \par
+		 X=Y: $false \equiv \neg p \land p$
+		 
+			\myparagraph{Solución:}
+			\textlangle{} La expresión E es de la forma \textrangle\par
+			$E: z \lor p \equiv p$\par
+			\textlangle{} Con X \textrangle\par
+			$X: false$\par
+			\textlangle{} Con Y \textrangle\par
+			$Y: \neg p \land p$\par
+			\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+			$E[z:=Y]: \neg p \land p \lor p \equiv p$\par
+			\hspace{0.8cm}
+
+		\item E[z:=X]: $p \lor (q \equiv p \lor q)$ \par
+		 X=Y: $p \lor q \equiv q \lor p$
+		 
+			\myparagraph{Solución:}
+			\textlangle{} La expresión E es de la forma \textrangle\par
+			$E: p \lor (q \equiv z )$\par
+			\textlangle{} Con X \textrangle\par
+			$X: p \lor q$\par
+			\textlangle{} Con Y \textrangle\par
+			$Y: q \lor p$\par
+			\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+			$E[z:=Y]: p \lor (q \equiv q \lor p )$\par
+			\hspace{0.8cm}
+
+		\item E[z:=X]: $(p \land (q \lor r)) \lor ((p \lor q) \land (p \lor r))$ \par
+		 X=Y: $p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$
+		 
+			\myparagraph{Solución:}
+			\textlangle{} La expresión E es de la forma \textrangle\par
+			$E: z \lor ((p \lor q) \land (p \lor r))$\par
+			\textlangle{} Con X \textrangle\par
+			$X: p \land (q \lor r)$\par
+			\textlangle{} Con Y \textrangle\par
+			$Y: (p \land q) \lor (p \land r)$\par
+			\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+			$E[z:=Y]: (p \land q) \lor (p \land r) \lor ((p \lor q) \land (p \lor r))$\par
+			\hspace{0.8cm}
+
+		\item E[z:=X]: $p \Rightarrow (p \lor q \equiv p \land q)$ \par
+		 X=Y: $p \equiv q \equiv p \lor q \equiv p \land q$
+		 
+			\myparagraph{Solución:}
+			Esta pregunta tiene 3 respuestas que se muestran a continuación.
+			\begin{enumerate}
+				\item \textlangle{} La expresión E es de la forma \textrangle\par
+				$E: z \Rightarrow (p \lor q \equiv p \land q)$\par
+				\textlangle{} Con X \textrangle\par
+				$X: p$\par
+				\textlangle{} Con Y \textrangle\par
+				$Y: q \equiv p \lor q \equiv p \land q$\par
+				\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+				$E[z:=Y]: q \equiv p \lor q \equiv p \land q \Rightarrow (p \lor q \equiv p \land q)$\par
+				\hspace{0.8cm}
+
+				\item \textlangle{} La expresión E es de la forma \textrangle\par
+				$E: p \Rightarrow (z)$\par
+				\textlangle{} Con X \textrangle\par
+				$X: p \lor q \equiv p \land q$\par
+				\textlangle{} Con Y \textrangle\par
+				$Y: q \equiv p$\par
+				\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+				$E[z:=Y]: p \Rightarrow (q \equiv p)$\par
+				\hspace{0.8cm}
+
+				\item \textlangle{} La expresión E es de la forma \textrangle\par
+				$E: p \Rightarrow (p \lor q \equiv z)$\par
+				\textlangle{} Con X \textrangle\par
+				$X: p \land q$\par
+				\textlangle{} Con Y \textrangle\par
+				$Y: p \equiv q \equiv p \lor q$\par
+				\textlangle{} Finalmente se tiene aplicando Leibniz \textrangle\par
+				$E[z:=Y]: p \Rightarrow (p \lor q \equiv p \equiv q \equiv p \lor q)$\par
+				\hspace{0.8cm}
+			\end{enumerate}
+
+		\item E[z:=X]: $p \land (q \Rightarrow r) \equiv p \Rightarrow (q \Rightarrow r)$ \par
+		 X=Y: $q \Rightarrow r \equiv p \lor q$
+
+		\item E[z:=X]: $(p \lor q) \land r \equiv p \Rightarrow p \lor q$ \par
+		 X=Y: $q \land r \equiv p \lor q$
+
+		\item E[z:=X]: $p \lor (q \land r) \Rightarrow p \lor q$ \par
+		 X=Y: $p \lor q \equiv \neg (\neg p \land q)$
+
+		\item E[z:=X]: $(s \land \neg t) \lor (p \Rightarrow \neg t) \Rightarrow \neg t \equiv p \Rightarrow \neg t \lor q$ \par
+		 X=Y: $p \Rightarrow \neg t \equiv \text{true}$
+
+	\end{enumerate}
+
+	\item Para cada una de las siguiente expresiones E[z:=X] y E[z:=Y], identifíque un \say{hints} X = Y
+	que muestre que ellas son iguales e indique la E original.
+
+	\begin{enumerate}
+		\item  E[z:=X]: $(p \lor q \Rightarrow q \lor r) \land (p \lor q)$ \par
+		 E[z:=Y]:$(p \Rightarrow (q \lor r)) \land p$ \par
+
+		\item  E[z:=X]:$((\neg p \lor p) \lor (\neg p \lor q)) \Rightarrow (q \lor \neg p)$ \par
+		 E[z:=X]:$((\neg p \lor p) \lor (p \Rightarrow q)) \Rightarrow (q \lor \neg p)$ \par
+
+		\item  E[z:=X]:$(p \Rightarrow q) \Rightarrow (s \land t) \lor \neg r$\par
+		 E[z:=X]:$(p \Rightarrow q) \Rightarrow \text{false} \lor \neg r$ \par
+
+		\item  E[z:=X]:$r \equiv \neg s \equiv ( \text{true} \lor p \Rightarrow q) \land (r \equiv \neg s)$ \par
+		 E[z:=X]:$r \equiv r \equiv \neg s \equiv ( \text{true} \lor p \Rightarrow q) \land (r \equiv r \equiv \neg s)$ \par
+			
+		 
+		 \myparagraph{Solución:}
+		 Esta pregunta tiene 2 respuestas que se muestran a continuación.
+		 \begin{enumerate}
+			 \item \textlangle{} La expresión E es de la forma \textrangle\par
+			 $E: r \equiv z \equiv ( \text{true} \lor p \Rightarrow q) \land (r \equiv z)$\par
+			 \textlangle{} Con X \textrangle\par
+			 $X: \neg s$\par
+			 \textlangle{} Con Y \textrangle\par
+			 $Y: r \equiv \neg s$\par
+			 \hspace{0.8cm}
+
+			 \item \textlangle{} La expresión E es de la forma \textrangle\par
+			 $E: z \equiv \neg s \equiv ( \text{true} \lor p \Rightarrow q) \land (z \neg s)$\par
+			 \textlangle{} Con X \textrangle\par
+			 $X: r$\par
+			 \textlangle{} Con Y \textrangle\par
+			 $Y: r \equiv r$\par
+		 \end{enumerate}
+
+	\end{enumerate}
+
+	\item Elimine los paréntesis innecesarios de la siguientes expresiones.
+
+	\begin{enumerate}
+		\item $((p \Rightarrow q) \equiv (p \land (q \lor r)) \Rightarrow (r \lor (s \land t))) \lor \neg s \Leftarrow u \equiv t$
+		
+		\item $(r \lor (s \lor (t \lor \neg \neg q) \Rightarrow s) \equiv u) \equiv (p \lor q) \Rightarrow (t \equiv \neg t)$
+		
+		\item $((\text{true} \equiv (\neg \text{false} \Rightarrow \text{false}) \land \neg \text{true}) \Leftarrow \text{false}) \lor (\text{true} \land \text{false})$
+		
+		\item $((p \Rightarrow (q \Leftarrow r)) \lor (s \equiv t)) \lor (t \Rightarrow (\neg t \Rightarrow q) \equiv r) \lor (p \land p)$
+		
+		\item $p \Rightarrow ((q \land ((r \equiv q) \equiv t)) \lor \neg q) \equiv s \equiv p \lor q \Rightarrow t$
+		
+	\end{enumerate}
+
+	\item Indique las todas las subexpresiones de la siguientes expresiones.
+
+	\begin{enumerate}
+		\item $p \land q \lor r \equiv p \Rightarrow r \lor q \land \neg(q \Rightarrow r \equiv s) \equiv a \lor b \Leftarrow s \equiv c$
+		
+		
+		\myparagraph{Solución:}
+		\textlangle{} Se definen las subexpresiones siguiendo la inducción estructural para las expresiones booleanas bien formadas, empezando por el caso base (constantes y variables), siguiendo con las expresiones negadas y finalmente las expresiones con operadores binarios en orden de precedencia \textrangle\par
+		%\begin{sloopypar}
+			\{p, q, r, s, a, b, c, ${\neg(q \Rightarrow r \equiv s)}$, ${p \land q}$, ${p \land q \lor r}$, ${r \lor q}$, $r \lor q \land \neg(q \Rightarrow r \equiv s)$, $a \lor b$, $p \Rightarrow r \lor q \land \neg(q \Rightarrow r \equiv s)$, $q \Rightarrow r$, $a \lor b \Leftarrow s$, $p \land q \lor r \equiv p \Rightarrow r \lor q \land \neg(q \Rightarrow r \equiv s)$, $q \Rightarrow r \equiv s$,  $p \land q \lor r \equiv p \Rightarrow r \lor q \land \neg(q \Rightarrow r \equiv s) \equiv a \lor b \Leftarrow s$, $p \land q \lor r \equiv p \Rightarrow r \lor q \land \neg(q \Rightarrow r \equiv s) \equiv a \lor b \Leftarrow s \equiv c$\}\par
+		%\end{sloopypar}
+		\hspace{0.8cm}
+		
+
+		\item $\neg a \land \neg b \equiv \neg(a \land b \equiv a \equiv b) \equiv c \lor d \Rightarrow e \land f \Leftarrow a \land b$
+
+			\myparagraph{Solución:}
+			\textlangle{} Se definen las subexpresiones siguiendo la inducción estructural para las expresiones booleanas bien formadas, empezando por el caso base (constantes y variables), siguiendo con las expresiones negadas y finalmente las expresiones con operadores binarios en orden de precedencia \textrangle\par
+			\{ a, b, c, e, f, $\neg a$, $\neg b$, $\neg(a \land b \equiv a \equiv b)$, $\neg a \land \neg b$, $a \land b$, $c \lor d$, $e \land f$, $c \lor d \Rightarrow e \land f$, $c \lor d \Rightarrow e \land f \Leftarrow a \land b$, $a \land b \equiv a$, $a \land b \equiv a \equiv b$, $\neg a \land \neg b \equiv \neg(a \land b \equiv a \equiv b)$, $\neg a \land \neg b \equiv \neg(a \land b \equiv a \equiv b) \equiv c \lor d \Rightarrow e \land f \Leftarrow a \land b$ \}
+			\hspace{0.8cm}
+
+		\item $a \Rightarrow b \Rightarrow c \Rightarrow d \lor e \equiv f \land g \equiv h \Leftarrow i \lor j \lor k \lor \neg l \equiv m$
+		
+			\myparagraph{Solución:}
+			\textlangle{} Se definen las subexpresiones siguiendo la inducción estructural para las expresiones booleanas bien formadas, empezando por el caso base (constantes y variables), siguiendo con las expresiones negadas y finalmente las expresiones con operadores binarios en orden de precedencia. Para este ejercicio que tiene 3 implicaciones consecutivas hay que tomar en cuenta que la implicación es asociativa por la derecha por lo tanto se debe proceder de derecha a izquierda \textrangle\par
+			\{ a, b, c, e, f, g, h, i, j, k, l, m, $\neg l$, $d \lor e$, $f \land g$, $i \lor j$, $i \lor j \lor k$, $i \lor j \lor k \lor \neg l$, $c \Rightarrow d \lor e $, $b \Rightarrow c \Rightarrow d \lor e $, $a \Rightarrow b \Rightarrow c \Rightarrow d \lor e $, $h \Leftarrow i \lor j \lor k \lor \neg l$, $a \Rightarrow b \Rightarrow c \Rightarrow d \lor e \equiv f \land g$, $a \Rightarrow b \Rightarrow c \Rightarrow d \lor e \equiv f \land g \equiv h \Leftarrow i \lor j \lor k \lor \neg l$, $a \Rightarrow b \Rightarrow c \Rightarrow d \lor e \equiv f \land g \equiv h \Leftarrow i \lor j \lor k \lor \neg l \equiv m$  \}
+			\hspace{0.8cm}
+
+		\item $p \land q \lor r \Rightarrow \neg p \land q \lor r \lor s \equiv t \lor u \equiv \neg v \lor w \Leftarrow x \land y \land z \lor \neg(a \equiv b)$
+		
+		\item $\neg(a \lor b \equiv c \land d \Rightarrow \neg(e \Leftarrow f \equiv g)) \land r \lor s \equiv t \land v \lor \neg(a \equiv \neg b \land c \Rightarrow a)$
+		
+	\end{enumerate}
+
+	\item Clasifíque las siguientes expresiones entre válidas, satisfacibles, contingencias e insatisfacibles.
+	Justifíque su respuesta a través de una tabla de verdad.
+
+	\begin{enumerate}
+		\item $p \lor \neg q \Rightarrow q \land p \land \neg(q \land p)$
+
+		\item $\neg(\neg(p \Rightarrow q)) \Rightarrow (p \ncong q)$
+
+		\item $p \lor q \Rightarrow p \lor (q \equiv r) \land (p \lor r)$
+
+		\item $p \Rightarrow (p \Rightarrow (q \equiv \text{true}) \Rightarrow r) \Rightarrow (p \lor \neg q)$
+
+		\item $(p \ncong q) \land \neg r \Leftarrow \neg p \equiv p \lor (q \land \neg r)$
+	\end{enumerate}
+
+	\item Clasifíque las siguientes expresiones entre válidas, satisfacibles, contingencias e insatisfacibles.
+	Justifíque su respuesta a través de una tabla de verdad.
+
+	\begin{enumerate}
+		\item $p \lor \neg q \equiv p \lor q \equiv p$
+
+		\item $p \lor q \equiv \neg p \equiv q \equiv p \land q$
+
+		\item $p \land (q \lor p) \equiv \neg q$
+
+		\item $p \Rightarrow (q \Rightarrow p) \equiv p \Rightarrow q \Rightarrow p$ 
+	\end{enumerate}
+
+	\item Clasifíque las expresiones duales de las siguientes expresiones Booleanas en válidas, satis-
+	facibles, contingencias e insatisfacibles. Justi?que en base a la clasi?cación dada para cada
+	expresión dual, qué se puede decir de la expresión original.
+
+	\begin{enumerate}
+		\item $q \Rightarrow \neg p \equiv p \equiv q \equiv p \lor q$
+
+		\item $q \lor p \equiv p \lor \neg q \equiv \neg p$
+
+		\item $p \land (p \lor q) \equiv \neg p$
+
+		\item $(p \lor \neg p) \land q \equiv \neg$ 
+	\end{enumerate}
+
+	\item Considere las siguiente expresiones Booleanas:
+	\begin{enumerate}
+		\item $(p \cdot q) * (q \oplus p)$
+
+		\item $p \cdot q \equiv p \oplus \neg q \equiv \neg p$
+		
+		\item $(p \cdot (q \otimes r)) \oplus (q \odot p) * r$
+	\end{enumerate}
+
+	Sustituya los símbolos $\land$, $\lor$, $\oplus$, $\neg$, $\leftrightarrow$ por conectores del lenguaje de las expresiones Booleanas de manera que en cada sustitución cada expresión cumpla una de las siguientes condiciones:
+	
+	\begin{itemize}
+		\item La expresión es una tautología.
+		\item La expresión tiene al menos una valuación que la satisface y una que no.
+		\item La expresión no tiene valuación alguna que la satisfaga.
+		\item El negado de la expresión dual es una tautología.
+	\end{itemize}
+
+	Haga la tabla de la verdad para cada expresión obtenida.
+
+	\item Sustituya los símbolos $\land$, $\oplus$, $\odot$ y $\otimes$ por conectores del lenguaje de las expresiones Booleanas de manera que la expresión resultante sea una tautología. ¿Qué puede decir sobre la validez de la expresión dual? Justifique su respuesta.\par
+	$p \land q \oplus \neg(q \otimes \neg p) \land \neg t \odot t$
+
+	\item ¿Son las siguientes expresiones Booleanas tautologías, contingencias o expresiones no satisfecibles? Justifíque su respuesta.
+
+	\begin{enumerate}
+		\item $((¬p \land q) \land (r \lor s)) \lor (¬t \land x) \Rightarrow (q \land ¬p \nleftrightarrow ¬k)$
+		
+		\item $(p \land q) \lor (¬q \land p) \Leftarrow p \lor (¬t \land x) \lor (u \nleftrightarrow v)$
+	\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
