@@ -301,7 +301,7 @@ E[z:=Y]. Puede haber varias respuestas, hallarlas todas.
 
 		\item $p \Rightarrow (p \Rightarrow (q \equiv \text{true}) \Rightarrow r) \Rightarrow (p \lor \neg q)$
 
-		\item $(p \ncong q) \land \neg r \Leftarrow \neg p \equiv p \lor (q \land \neg r)$
+		\item $(p \neq q) \land \neg r \Leftarrow \neg p \equiv p \lor (q \land \neg r)$
 	\end{enumerate}
 
 	\item Clasifíque las siguientes expresiones entre válidas, satisfacibles, contingencias e insatisfacibles.
@@ -357,9 +357,9 @@ E[z:=Y]. Puede haber varias respuestas, hallarlas todas.
 	\item ¿Son las siguientes expresiones Booleanas tautologías, contingencias o expresiones no satisfecibles? Justifíque su respuesta.
 
 	\begin{enumerate}
-		\item $((¬p \land q) \land (r \lor s)) \lor (¬t \land x) \Rightarrow (q \land ¬p \nleftrightarrow ¬k)$
+		\item $((\neg p \land q) \land (r \lor s)) \lor (\neg t \land x) \Rightarrow (q \land \neg p \neq \neg k)$
 		
-		\item $(p \land q) \lor (¬q \land p) \Leftarrow p \lor (¬t \land x) \lor (u \nleftrightarrow v)$
+		\item $(p \land q) \lor (\neg q \land p) \Leftarrow p \lor (\neg t \land x) \lor (u \neq v)$
 	\end{enumerate}
 
 \end{enumerate}
